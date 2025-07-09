@@ -1,26 +1,31 @@
-import { FaArrowRight } from "react-icons/fa";
+import { IoArrowForwardOutline } from "react-icons/io5";
 
-// eslint-disable-next-line react/prop-types
-const Button = ({ children, buttonType, type, isShowArrow = true }) => {
-  var btnClasses = [];
-  var commonClasses = ["rounded-[60px] flex p-1 h-[55px] items-center"];
-  if (type == "primary") {
-    btnClasses = ["bg-orange-dark", ...commonClasses, "text-white"];
-  } else if (type == "secondary") {
-    btnClasses = ["bg-orange", ...commonClasses];
-  }
+const Button = ({
+  children,
+  type = "button",
+  variant = "primary",
+  isShowIcon = true,
+}) => {
+  const baseClass = "rounded-full px-1 h-[55px] text-[16px] cursor-pointer";
+
+  const variantStyle = {
+    primary: "bg-orange-dark text-white",
+    secondary: "",
+  };
 
   return (
-    <button type={buttonType} className={btnClasses.join(" ")}>
-      {isShowArrow && (
-        <div className="bg-white rounded-full h-[50px] w-[50px] text-orange-dark flex items-center justify-center">
-          <FaArrowRight color="text-orange-dark" size={25} />
-        </div>
+    <button
+      type={type}
+      className={baseClass + " " + variantStyle[variant] + " flex items-center"}
+    >
+      {isShowIcon && (
+        <span className="h-[49px] text-orange-dark bg-white flex items-center justify-center w-[49px] rounded-full ">
+          <IoArrowForwardOutline size={25}></IoArrowForwardOutline>
+        </span>
       )}
-
-      <span className="px-[39px]"> {children}</span>
+      <span className="px-[40px]">{children}</span>
     </button>
   );
 };
 
-export default Button;
+export { Button };
